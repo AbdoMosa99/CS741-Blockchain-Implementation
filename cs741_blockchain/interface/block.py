@@ -1,36 +1,40 @@
 from datetime import datetime
 import hashlib
-import time
 from typing import List
 
-from interface import Transaction, Block
+from cs741_blockchain.interface.transaction import Transaction
 
 
 class Block:
-    def __init__(self):
-        self.timestamp: datetime = datetime.now()
+    def __init__(self, created_by):
+        self.creation_time: datetime = datetime.now()
+        self.seal_time: datetime = None
         self.transactions: List[Transaction] = []
-        self.prev_hash = ""
-        self.hash = ""
+        self.prev_hash: str = ""
+        self.hash: str = ""
+        self.create_by = created_by
 
     def _hash_block(self):
         self.hash = hashlib.sha256(
             bytearray(
                 str(self.prev_hash)
-                + str(self.timestamp)
-                + self.transactions[-1].hash,
+                + str(self.creation_time)
+                + str(self.seal_time)
+                + "".join([t.hash for t in self.transactions]),
                 "utf-8"
             )
         ).hexdigest()
 
-    def add_transaction(self, transaction: Transaction):
+    def add_transaction(self, transaction_data):
+        transaction = Transaction(transaction_data)
+        if self.transactions:
+            transaction.prev_hash = self.transactions[-1].hash
+
+        transaction.seal()
         self.transactions.append(transaction)
 
-    def link(self, block: Block):
-        self.prev_hash = block.hash
-
     def seal(self):
-        self.timestamp = time.time()
+        self.seal_time = datetime.now()
         self._hash_block()
 
     def validate(self):
@@ -45,6 +49,3 @@ class Block:
             except Exception as e:
                 raise Exception(f"Invalid Block: {e} In block: {str(self)}")
 
-    def __repr__(self):
-        return f"Block<hash: {self.hash}, prev_hash: {self.prev_hash}, \
-            messages: {self.transactions}, time: {self.timestamp}>"

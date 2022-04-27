@@ -7,7 +7,7 @@ class Transaction:
         self.hash = ''
         self.prev_hash = ''
         self.timestamp = time.time()
-        self.size = len(data.encode('utf-8'))   # length in bytes
+        self.size = len(str(data).encode('utf-8'))   # length in bytes
         self.data = data
         self.payload_hash = self._hash_payload()
 
@@ -28,9 +28,6 @@ class Transaction:
                 "utf-8")
         ).hexdigest()
 
-    def link(self, transaction):
-        self.prev_hash = transaction.hash
-
     def seal(self):
         self.hash = self._hash()
 
@@ -45,9 +42,3 @@ class Transaction:
                 f"Invalid Transaction: hash don't match. "
                 f"In  {str(self)}."
             )
-
-    def __repr__(self):
-        return (
-            f"<Transaction(hash: {self.hash}, prev_hash: {self.prev_hash},"
-            f"data: {self.data})>"
-        )
