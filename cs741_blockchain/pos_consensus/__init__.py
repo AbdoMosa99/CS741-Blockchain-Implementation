@@ -1,0 +1,1 @@
+from cs741_blockchain.pos_consensus.voting import Voting

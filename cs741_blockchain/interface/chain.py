@@ -52,13 +52,14 @@ class Blockchain:
         pass
 
     def resolve_conflicts(self):
-        longest_chain = self.chain
+        #longest_chain = self.chain
         for node in self.owner.network:
-            if len(node.blockchain.chain) > len(longest_chain):
+            if len(node.blockchain.chain) > len(self.chain):
                 if node.blockchain.validate():
-                    longest_chain = node.blockchain.chain
+                    #longest_chain = node.blockchain.chain
+                    self.chain = node.blockchain.chain
 
-        self.chain = longest_chain
+        #self.chain = longest_chain
 
     def print(self):
         print(f"Blockchain:")
