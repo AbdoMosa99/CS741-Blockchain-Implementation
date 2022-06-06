@@ -1,0 +1,31 @@
+The time to create 50 Votes in 10 Blocks is:
+0.17160797119140625
+
+The time to create 100 Votes in 20 Blocks is:
+0.34348011016845703
+
+The time to create 500 Votes in 100 Blocks is:
+1.4682097434997559
+
+The time to create 1000 Votes in 200 Blocks is:
+2.8673460483551025
+
+The time to create 5000 Votes in 1000 Blocks is:
+14.68945026397705
+
+The time to create 10000 Votes in 2000 Blocks is:
+30.13384509086609
+
+The time to create 50000 Votes in 10000 Blocks is:
+208.33457279205322
+
+The time to create 100000 Votes in 20000 Blocks is:
+569.7281620502472
+
+
+
+
+الكومنتات ع الكود
+
+
+ونحط بيانات الجهاز اللي عملنا عليه البينش مارك

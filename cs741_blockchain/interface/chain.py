@@ -58,6 +58,7 @@ class Blockchain:
                 if node.blockchain.validate():
                     #longest_chain = node.blockchain.chain
                     self.chain = node.blockchain.chain
+                    
 
         #self.chain = longest_chain
 

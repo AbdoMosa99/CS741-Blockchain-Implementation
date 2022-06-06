@@ -1,8 +1,11 @@
-import random
 
+import random
 from cs741_blockchain.interface.chain import Blockchain
 
 
 class POS_Blockchain(Blockchain):
-    def proof(self, candidates, bets):
-        return random.choices(candidates, bets)[0]
+
+    @staticmethod
+    def proof(validators, bets):
+        return random.choices(validators, bets)[0]
+
